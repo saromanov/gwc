@@ -1,7 +1,10 @@
 package main
 
 import (
+	"bufio"
 	"flag"
+	"log"
+	"os"
 
 	"github.com/saromanov/gwc/internal/core"
 )
@@ -19,8 +22,18 @@ func main() {
 		Words: *wordsPtr,
 		Bytes: *bytesPtr,
 	}
+	var stdin []byte
+	scanner := bufio.NewScanner(os.Stdin)
+	for scanner.Scan() {
+		stdin = append(stdin, scanner.Bytes()...)
+	}
+	if err := scanner.Err(); err != nil {
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
 
 	data := core.New(cfg)
-	data.Run()
+	data.Run(stdin)
 
 }

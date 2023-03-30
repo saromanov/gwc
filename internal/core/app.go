@@ -11,6 +11,11 @@ func New(cfg Config) *App {
 	}
 }
 
-func (a *App) Run() error {
+func (a *App) Run(data []byte) error {
+	r, err := countData(a.cfg, data)
+	if err != nil {
+		return err
+	}
+	output(r)
 	return nil
 }

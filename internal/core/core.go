@@ -5,6 +5,12 @@ import (
 	"os"
 	"io"
 )
+
+// result returns output data
+type result struct {
+    bytesCount int
+    wordsCount int
+}
 // ReadFile provides reading of the file
 func ReadFile(path string) (int64, error) {
     f, err := os.Open(path)
@@ -35,4 +41,28 @@ func ReadFile(path string) (int64, error) {
         }
     }
     return nr, nil
+}
+
+func countData(cfg Config, data []byte) (result, error) {
+    r := result{}
+    if cfg.isAllFalse() {
+        r.bytesCount = len(data)
+    }
+    words := 0
+    tmpWords := 0
+    for i := 0;i < len(data);i++ {
+        if data[i] == ' ' && tmpWords > 0{
+            words++
+            tmpWords = 0
+        }
+        if data[i] != '\n' && data[i] != '\b' {
+            tmpWords++
+        }
+           
+    }
+    if tmpWords > 0 {
+        words++
+    }
+    r.wordsCount = words
+    return r, nil
 }
