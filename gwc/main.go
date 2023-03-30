@@ -2,9 +2,8 @@ package main
 
 import (
 	"flag"
-	"fmt"
 
-	"github.com/saromnov/gwc/internal/core"
+	"github.com/saromanov/gwc/internal/core"
 )
 
 func main() {
@@ -16,9 +15,9 @@ func main() {
 	flag.Parse()
 
 	// Access command line flag values
-	cfg := &core.Config{
-		wordsPtr: *wordsPtr,
-		bytesPtr: *bytesPtr,
+	cfg := core.Config{
+		Words: *wordsPtr,
+		Bytes: *bytesPtr,
 	}
 
 	data := core.New(cfg)
