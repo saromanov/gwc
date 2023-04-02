@@ -11,6 +11,7 @@ func New(cfg Config) *App {
 	}
 }
 
+// Run provides running of the app
 func (a *App) Run(data []byte) error {
 	r, err := countData(a.cfg, data)
 	if err != nil {

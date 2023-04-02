@@ -10,6 +10,8 @@ import (
 type result struct {
     bytesCount int
     wordsCount int
+    charsCount int
+    linesCount int
 }
 // ReadFile provides reading of the file
 func ReadFile(path string) (int64, error) {
